@@ -22,14 +22,13 @@ class StudentInfoHandler(BaseHandler):
     def post(self, *args, **kwargs):
         try:
             data = json.loads(self.request.body)
-            print(data.get("work_project"))
-            print(work_type_map)
-            print(work_type_map.get(data.get("work_project", ""), ""))
+            # print(data.get("work_project"))
+            # print(work_type_map)
+            # print(work_type_map.get(data.get("work_project", ""), ""))
             data["work_type"] = work_type_map.get(data.get("work_project", ""), "")
-            print(data)
+            # print(data)
             res = StudentService.insert_student_info(data)
-            print(res)
-            self.finish({'success': 1, "data": res})
+            self.finish({'success': 1, "data": res, "insert": res})
         except:
             print(traceback.format_exc())
             self.finish()

@@ -30,14 +30,14 @@ class BaseHandler(tornado.web.RequestHandler):
         self.finish()
 
 
-    # def finish(self, chunk=None):
-    #     self.response_data = {
-    #         'code': 1,
-    #         'msg': 'success'
-    #     }
-    #     data = {
-    #         'code': self.response_data.get('code'),
-    #         'msg': self.response_data.get('msg'),
-    #         'data': chunk or {}
-    #     }
-    #     return super(BaseHandler, self).finish(chunk=json.dumps(data))
+    def finish(self, chunk=None):
+        self.response_data = {
+            'code': 1,
+            'msg': 'success'
+        }
+        data = {
+            'code': self.response_data.get('code'),
+            'msg': self.response_data.get('msg'),
+            'data': chunk or {}
+        }
+        return super(BaseHandler, self).finish(chunk=json.dumps(data))

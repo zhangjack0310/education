@@ -29,8 +29,10 @@ class Mysql(object):
                 Mysql.db.add(obj)
             if commit:
                 Mysql.db.commit()
+            return True
         except:
             Mysql.db.rollback()
+            return False
 
     @staticmethod
     def ping_db():
