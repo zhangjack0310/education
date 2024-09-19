@@ -23,9 +23,9 @@ class StudentInfoHandler(BaseHandler):
     def post(self, *args, **kwargs):
         try:
             data = json.loads(self.request.body)
-            result = reduce(lambda x, y: x and y, data.values())
-            if not result:
-                return self.finish({'success': 1, "data": {}, "insert": False, "reason": "信息填写不全"})
+            # result = reduce(lambda x, y: x and y, data.values())
+            # if not result:
+            #     return self.finish({'success': 1, "data": {}, "insert": False, "reason": "信息填写不全"})
             # print(data.get("work_project"))
             # print(work_type_map)
             # print(work_type_map.get(data.get("work_project", ""), ""))
