@@ -5,6 +5,7 @@ from .services import StudentService
 from tornado.web import RequestHandler
 import traceback
 import time
+from functools import reduce
 
 work_type_map = {'低压电工作业': '电工作业', '高压电工作业': '电工作业', '电力电缆作业': '电工作业', '继电保护作业': '电工作业', '电气试验作业': '电工作业',
                  '防爆电气作业': '电工作业', '熔化焊接与热切割作业': '焊接与热切割作业',
@@ -22,6 +23,9 @@ class StudentInfoHandler(BaseHandler):
     def post(self, *args, **kwargs):
         try:
             data = json.loads(self.request.body)
+            result = reduce(lambda x, y: x and y, data.values())
+            if not result:
+                return self.finish({'success': 1, "data": {}, "insert": False, "reason": "信息填写不全"})
             # print(data.get("work_project"))
             # print(work_type_map)
             # print(work_type_map.get(data.get("work_project", ""), ""))
@@ -31,4 +35,4 @@ class StudentInfoHandler(BaseHandler):
             self.finish({'success': 1, "data": res, "insert": res})
         except:
             print(traceback.format_exc())
-            self.finish()
+            self.finish({'success': 1, "data": {}, "insert": False})
