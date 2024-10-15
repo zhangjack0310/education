@@ -5,3 +5,4 @@ Pillow==8.4.0
 PyMySQL==1.0.2
 SQLAlchemy==1.4.54
 tornado==6.1
+orjson==3.6.1

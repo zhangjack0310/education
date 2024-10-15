@@ -6,6 +6,7 @@ from tornado.web import RequestHandler
 import traceback
 import time
 from functools import reduce
+from library.oss import OSSService
 
 work_type_map = {'低压电工作业': '电工作业', '高压电工作业': '电工作业', '电力电缆作业': '电工作业', '继电保护作业': '电工作业', '电气试验作业': '电工作业',
                  '防爆电气作业': '电工作业', '熔化焊接与热切割作业': '焊接与热切割作业',
@@ -32,7 +33,14 @@ class StudentInfoHandler(BaseHandler):
             data["work_type"] = work_type_map.get(data.get("work_project", ""), "")
             # print(data)
             res = StudentService.insert_student_info(data)
-            self.finish({'success': 1, "data": res, "insert": res})
+            self.json({'success': 1, "data": res, "insert": res})
         except:
             print(traceback.format_exc())
-            self.finish({'success': 1, "data": {}, "insert": False})
+            self.json({'success': 1, "data": {}, "insert": False})
+
+
+
+class GetOssTokenHandler(BaseHandler):
+    def get(self):
+        token_info = OSSService.gen_oss_token_info()
+        return self.json(token_info)

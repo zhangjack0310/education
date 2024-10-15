@@ -6,7 +6,7 @@ from library.db import Mysql
 
 
 class StudentInfo(Base):
-    __tablename__ = 'student_info'
+    __tablename__ = 'student_info1'
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(64), comment="姓名")
     gender = Column(String(64), comment="性别")
@@ -27,6 +27,13 @@ class StudentInfo(Base):
     is_notified = Column(String(64), comment="是否通知到学员")
     status = Column(String(64), comment="学员状态")
     remark = Column(String(64), comment="备注")
+    province = Column(String(64), comment="省")
+    city = Column(String(64), comment="市")
+    area = Column(String(64), comment="区")
+    health_file_url = Column(String(256), comment="健康证明")
+    cert_scan_url = Column(String(256), comment="身份证复印件")
+    person_pic_url = Column(String(256), comment="个人照片")
+    education_scan_url = Column(String(256), comment="学历证明")
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now)
 

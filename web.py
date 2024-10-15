@@ -30,7 +30,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.finish()
 
 
-    def finish(self, chunk=None):
+    def json(self, chunk=None):
         self.response_data = {
             'code': 1,
             'msg': 'success'
